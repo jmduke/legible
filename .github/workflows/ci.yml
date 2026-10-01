@@ -19,6 +19,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      - run: pnpm cli:build
       - run: pnpm build
         env:
           # next build's type-check pass exceeds the default heap on ubuntu runners.

@@ -49,5 +49,9 @@ next-env.d.ts
 .env.*
 !.env.example
 
+# legible-cli build output
+/cli/dist/
+/cli/LICENSE
+
 # generated scan reports
 report.html

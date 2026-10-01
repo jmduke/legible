@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env node
 /**
  * Zero-config scanner: the full Legible pipeline (crawl -> detect) against
  * any public site, no database or Google account required. GSC-powered
@@ -59,7 +59,7 @@ function parseArgs(argv: string[]): CliArgs {
   const target = positional[0];
   if (!target || Number.isNaN(maxPages) || !FORMATS.includes(format)) {
     console.error(
-      `Usage: pnpm scan <url> [--max-pages N] [--format ${FORMATS.join("|")}] [--summary] [--output FILE] [--no-upload] [--no-follow <path-regex>]...`,
+      `Usage: legible-cli <url> [--max-pages N] [--format ${FORMATS.join("|")}] [--summary] [--output FILE] [--no-upload] [--no-follow <path-regex>]...`,
     );
     process.exit(1);
   }

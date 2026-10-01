@@ -77,6 +77,12 @@ The full crawl+detect pipeline runs standalone against any public site — no
 database, no Google account:
 
 ```sh
+npx legible-cli https://example.com
+```
+
+From a clone, `pnpm scan` runs the same CLI from source:
+
+```sh
 pnpm scan https://example.com
 pnpm scan https://example.com --summary                          # rollup + most-implicated pages
 pnpm scan https://example.com --max-pages 1000 --format agent    # LLM-ready work items
@@ -199,6 +205,17 @@ src/lib/pipeline/  runFullScan (the one scan recipe), lifecycle diff, DB scan ru
 src/cli.ts + src/cli/  scan CLI entry + terminal renderers
 src/worker/        pg-boss worker + per-site cron scheduler
 src/app/           login, dashboard, site detail, server actions
+```
+
+## Releasing the CLI
+
+`cli/` is the `legible-cli` npm package: `src/cli.ts` bundled by esbuild into
+`cli/dist/cli.mjs`, with only the crawler's runtime dependencies. To release,
+bump `version` in both `package.json` and `cli/package.json`, keep
+`cli/package.json` dependencies in step with the root, then:
+
+```sh
+cd cli && npm publish     # prepublishOnly runs pnpm cli:build
 ```
 
 ## Extending

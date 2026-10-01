@@ -1,0 +1,28 @@
+{
+  "name": "legible-cli",
+  "version": "1.0.0",
+  "description": "Crawl a website and report fixable SEO and site-health issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmduke/legible.git",
+    "directory": "cli"
+  },
+  "type": "module",
+  "bin": {
+    "legible-cli": "dist/cli.mjs"
+  },
+  "files": ["dist"],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prepublishOnly": "pnpm --dir .. cli:build"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1103.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "robots-parser": "^3.0.1"
+  }
+}
