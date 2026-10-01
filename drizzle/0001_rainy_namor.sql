@@ -1,0 +1,1 @@
+ALTER TABLE "sites" ADD COLUMN "no_follow_patterns" jsonb DEFAULT '[]'::jsonb NOT NULL;
