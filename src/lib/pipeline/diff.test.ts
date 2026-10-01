@@ -11,9 +11,9 @@ const finding = (key: string): RawFinding => ({
 
 describe("diffFindings", () => {
   it("classifies created, persisted, regressed, and resolved", () => {
-    const stillBroken = finding("https://x.com/still-broken");
-    const newlyBroken = finding("https://x.com/newly-broken");
-    const cameBack = finding("https://x.com/came-back");
+    const stillBroken = finding("https://example.com/still-broken");
+    const newlyBroken = finding("https://example.com/newly-broken");
+    const cameBack = finding("https://example.com/came-back");
 
     const diff = diffFindings(
       [stillBroken, newlyBroken, cameBack],
@@ -26,13 +26,13 @@ describe("diffFindings", () => {
     );
 
     expect(diff.created.map((c) => c.finding.key)).toEqual([
-      "https://x.com/newly-broken",
+      "https://example.com/newly-broken",
     ]);
     expect(diff.persisted.map((c) => c.finding.key)).toEqual([
-      "https://x.com/still-broken",
+      "https://example.com/still-broken",
     ]);
     expect(diff.regressed.map((c) => c.finding.key)).toEqual([
-      "https://x.com/came-back",
+      "https://example.com/came-back",
     ]);
     // Only *open* undetected findings resolve; already-resolved stay put.
     expect(diff.resolved).toEqual(["aaaaaaaaaaaaaaaa"]);
@@ -40,7 +40,7 @@ describe("diffFindings", () => {
 
   it("dedupes findings with identical fingerprints", () => {
     const diff = diffFindings(
-      [finding("https://x.com/a"), finding("https://x.com/a")],
+      [finding("https://example.com/a"), finding("https://example.com/a")],
       [],
     );
     expect(diff.created).toHaveLength(1);

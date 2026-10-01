@@ -6,12 +6,12 @@ describe("renderHtmlReport", () => {
   const findings: RawFinding[] = [
     {
       type: "broken_internal_link",
-      key: "https://x.com/dead",
+      key: "https://example.com/dead",
       title: "Broken link to /dead (404)",
       detail: {
-        url: "https://x.com/dead",
+        url: "https://example.com/dead",
         status: 404,
-        linkedFrom: ["https://x.com/"],
+        linkedFrom: ["https://example.com/"],
       },
     },
     {
@@ -29,8 +29,8 @@ describe("renderHtmlReport", () => {
   ];
 
   it("renders counts and section labels", () => {
-    const html = renderHtmlReport("https://x.com", findings);
-    expect(html).toContain("<h1>x.com</h1>");
+    const html = renderHtmlReport("https://example.com", findings);
+    expect(html).toContain("<h1>example.com</h1>");
     expect(html).toContain("2 findings");
     expect(html).toContain("Duplicate titles/descriptions");
     // Severity tabs are derived from the finding mix.
@@ -40,7 +40,7 @@ describe("renderHtmlReport", () => {
   });
 
   it("groups findings into navigable categories", () => {
-    const html = renderHtmlReport("https://x.com", findings);
+    const html = renderHtmlReport("https://example.com", findings);
     expect(html).toContain('data-cat="broken-links" data-sev="errors"');
     expect(html).toContain(
       'data-cat="duplicate-titles-descriptions" data-sev="warnings"',
@@ -49,18 +49,18 @@ describe("renderHtmlReport", () => {
   });
 
   it("links a row to the page it is about", () => {
-    const html = renderHtmlReport("https://x.com", findings);
-    expect(html).toContain('<a href="https://x.com/dead"');
+    const html = renderHtmlReport("https://example.com", findings);
+    expect(html).toContain('<a href="https://example.com/dead"');
   });
 
   it("escapes finding content", () => {
-    const html = renderHtmlReport("https://x.com", findings);
+    const html = renderHtmlReport("https://example.com", findings);
     expect(html).not.toContain("<script>alert(1)</script>");
     expect(html).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
   });
 
   it("escapes finding content in the filter index too", () => {
-    const html = renderHtmlReport("https://x.com", findings);
+    const html = renderHtmlReport("https://example.com", findings);
     expect(html).not.toMatch(/data-search="[^"]*<script/);
   });
 });
@@ -68,12 +68,12 @@ describe("renderHtmlReport", () => {
 describe("renderHtmlPendingReport", () => {
   it("shows scanning state and latest progress", () => {
     const html = renderHtmlPendingReport(
-      "https://x.com",
+      "https://example.com",
       "crawled 42 pages in 3.1s",
     );
     expect(html).toContain("Scanning");
     expect(html).toContain("crawled 42 pages in 3.1s");
-    expect(html).toContain("https://x.com");
+    expect(html).toContain("https://example.com");
     expect(html).toContain('role="status"');
   });
 });
