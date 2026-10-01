@@ -212,6 +212,13 @@ src/app/           login, dashboard, site detail, server actions
 - **New source** (beyond GSC): add to `src/lib/sources/` and extend
   `DetectionContext` with whatever signal it contributes.
 
+## Roadmap
+
+Checks from [specification.website](https://specification.website) that
+Legible does not cover yet: color contrast, keyboard navigation, focus
+indicators, reduced motion, server-side rendering, hreflang in sitemaps,
+TDMRep, PWA manifests, cookie consent, cross-origin isolation, and DNSSEC.
+
 ## Security
 
 See [SECURITY.md](SECURITY.md) to report a vulnerability.

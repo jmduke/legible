@@ -11,7 +11,7 @@ import { enqueueScan, syncSiteSchedule } from "@/lib/pipeline/queue";
 import { requireSession } from "@/lib/session";
 
 /** "sc-domain:example.com" -> "https://example.com"; URL prefixes pass through. */
-export async function originFromProperty(property: string): Promise<string> {
+async function originFromProperty(property: string): Promise<string> {
   if (property.startsWith("sc-domain:")) {
     return `https://${property.slice("sc-domain:".length)}`;
   }
